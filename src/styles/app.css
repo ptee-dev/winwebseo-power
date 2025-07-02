@@ -255,7 +255,7 @@
 /* layout */
 
 @utility section {
-  @apply w-full px-8 py-16 max-md:px-4 md:py-20;
+	@apply w-full py-16 max-sm:px-4 max-sm:py-4 sm:px-8 sm:py-8 md:py-14 lg:px-16 lg:py-16 xl:px-45 xl:py-20;
 }
 
 /* richtext */

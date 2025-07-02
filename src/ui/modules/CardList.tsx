@@ -35,10 +35,10 @@ export default function CardList({
 	return (
 		<section className="section space-y-12" {...moduleProps(props)}>
 			{(pretitle || intro) && (
-				<header className="richtext mx-auto max-w-screen-sm text-center text-balance">
+				<header className="richtext mx-auto w-full max-w-full px-4 text-left max-sm:px-0 sm:max-w-[75%] lg:max-w-[50%]">
 					<Pretitle>{pretitle}</Pretitle>
 					<PortableText value={intro} />
-					<CTAList className="justify-center" ctas={ctas} />
+					<CTAList className="justify-start" ctas={ctas} />
 				</header>
 			)}
 
@@ -70,17 +70,17 @@ export default function CardList({
 						)}
 						key={key}
 					>
-{card.image && (
-  <figure>
-    <SanityImage
-      image={card.image}
-      alt={(card?.title ?? 'Card image') as string}
-      width={600}
-      height={338} // 👉 อัตราส่วน 16:9 ตาม aspect-video
-      className="aspect-video w-full object-cover"
-    />
-  </figure>
-)}
+						{card.image && (
+							<figure>
+								<SanityImage
+									image={card.image}
+									alt={(card?.title ?? 'Card image') as string}
+									width={600}
+									height={338} // 👉 อัตราส่วน 16:9 ตาม aspect-video
+									className="aspect-video w-full object-cover"
+								/>
+							</figure>
+						)}
 
 						<div className="richtext grow">
 							<PortableText value={card.content} />

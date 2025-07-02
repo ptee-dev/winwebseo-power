@@ -30,7 +30,7 @@ export default async function LogoList({
 	return (
 		<section className="section space-y-12">
 			{(pretitle || intro) && (
-				<header className="richtext mx-auto max-w-screen-sm text-center text-balance">
+				<header className="richtext mx-auto w-full max-w-full px-4 text-left max-sm:px-0 sm:max-w-[75%] lg:max-w-[50%]">
 					<Pretitle>{pretitle}</Pretitle>
 					<PortableText value={intro} />
 				</header>
@@ -66,4 +66,4 @@ export default async function LogoList({
 			</figure>
 		</section>
 	)
-} 
+}
