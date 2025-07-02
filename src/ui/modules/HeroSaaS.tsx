@@ -26,7 +26,10 @@ export default function HeroSaaS({
 	const asset = assets?.[0]
 
 	return (
-		<section className="section space-y-8 text-center" {...moduleProps(props)}>
+		<section
+			className="section space-y-8 py-0 text-center"
+			{...moduleProps(props)}
+		>
 			<div className="richtext mx-auto max-w-2xl text-balance">
 				<Pretitle>{pretitle}</Pretitle>
 				<PortableText
