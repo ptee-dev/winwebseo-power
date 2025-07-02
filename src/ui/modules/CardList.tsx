@@ -35,7 +35,7 @@ export default function CardList({
 	return (
 		<section className="section space-y-12" {...moduleProps(props)}>
 			{(pretitle || intro) && (
-				<header className="richtext text-center">
+				<header className="richtext mx-auto max-w-screen-sm text-center text-balance">
 					<Pretitle>{pretitle}</Pretitle>
 					<PortableText value={intro} />
 					<CTAList className="justify-center" ctas={ctas} />
