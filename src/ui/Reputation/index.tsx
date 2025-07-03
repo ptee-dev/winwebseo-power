@@ -84,7 +84,7 @@ export default async function Reputation({
 									title={count(forks_count, 'fork')}
 								>
 									<VscRepoForked className="inline-block" />
-									{!!stargazers_count
+									{stargazers_count
 										? forks_count
 										: count(forks_count, 'fork')}
 								</span>

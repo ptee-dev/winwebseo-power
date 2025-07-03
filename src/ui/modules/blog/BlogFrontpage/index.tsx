@@ -26,7 +26,7 @@ export default async function BlogFrontpage({
 		query: groq`
 			*[
 				_type == 'blog.post'
-				${!!lang ? `&& (!defined(language) || language == '${lang}')` : ''}
+				${lang ? `&& (!defined(language) || language == '${lang}')` : ''}
 			]|order(publishDate desc){
 				_type,
 				_id,

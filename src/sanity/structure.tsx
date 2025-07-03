@@ -26,6 +26,7 @@ export const structure = structureTool({
 
 				S.documentTypeListItem('navigation'),
 				S.documentTypeListItem('redirect').title('Redirects'),
+				S.documentTypeListItem('packagesPage').title('Packages Page'),
 
 				group(S, 'Miscellaneous', [
 					S.documentTypeListItem('announcement').title('Announcements'),

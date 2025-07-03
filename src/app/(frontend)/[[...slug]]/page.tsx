@@ -13,13 +13,15 @@ import { languages } from '@/lib/i18n'
 import errors from '@/lib/errors'
 
 export default async function Page({ params }: Props) {
-	const page = await getPage(await params)
+	const resolvedParams = await params
+	const page = await getPage(resolvedParams)
 	if (!page) notFound()
 	return <Modules modules={page.modules} page={page} />
 }
 
 export async function generateMetadata({ params }: Props) {
-	const page = await getPage(await params)
+	const resolvedParams = await params
+	const page = await getPage(resolvedParams)
 	if (!page) notFound()
 	return processMetadata(page)
 }
@@ -38,7 +40,7 @@ export async function generateStaticParams() {
 	return slugs.map(({ slug }) => ({ slug: slug.split('/') }))
 }
 
-async function getPage(params: Params) {
+async function getPage(params: ResolvedParams) {
 	const { slug, lang } = processSlug(params)
 
 	const page = await fetchSanityLive<Sanity.Page>({
@@ -74,13 +76,7 @@ async function getPage(params: Params) {
 	return page
 }
 
-type Params = { slug?: string[] }
-
-type Props = {
-	params: Promise<Params>
-}
-
-function processSlug(params: Params) {
+function processSlug(params: ResolvedParams) {
 	const lang =
 		params.slug && languages.includes(params.slug[0])
 			? params.slug[0]
@@ -104,4 +100,11 @@ function processSlug(params: Params) {
 	}
 
 	return { slug }
+}
+
+// 👇 แยก type ที่ใช้เพื่อให้เข้าใจง่าย
+type ResolvedParams = { slug?: string[] }
+
+type Props = {
+	params: Promise<ResolvedParams>
 }

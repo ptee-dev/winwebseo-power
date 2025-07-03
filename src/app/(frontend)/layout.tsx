@@ -1,4 +1,4 @@
-// import { GoogleTagManager } from '@next/third-parties/google'
+// app/(frontend)/layout.tsx
 import Root from '@/ui/Root'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import SkipToContent from '@/ui/SkipToContent'
@@ -10,14 +10,18 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@/styles/app.css'
 
-export default async function RootLayout({
+export const metadata = {
+	title: 'WinWebSEO',
+	description: 'รับทำเว็บไซต์ WordPress',
+}
+
+export default function FrontendLayout({
 	children,
 }: {
 	children: React.ReactNode
 }) {
 	return (
 		<Root>
-			{/* <GoogleTagManager gtmId="" /> */}
 			<body className="bg-canvas text-ink antialiased">
 				<NuqsAdapter>
 					<SkipToContent />
@@ -27,10 +31,8 @@ export default async function RootLayout({
 						{children}
 					</main>
 					<Footer />
-
 					<VisualEditingControls />
 				</NuqsAdapter>
-
 				<Analytics />
 				<SpeedInsights />
 			</body>

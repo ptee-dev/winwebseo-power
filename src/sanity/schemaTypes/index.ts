@@ -51,6 +51,7 @@ import stepList from './modules/step-list'
 import tabbedContent from './modules/tabbed-content'
 import testimonialFeatured from './modules/testimonial.featured'
 import testimonialList from './modules/testimonial-list'
+import packagesPage from './documents/packagesPage'
 
 export const schemaTypes: SchemaTypeDefinition[] = [
 	// documents
@@ -60,6 +61,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
 	blogPost,
 	blogCategory,
 	navigation,
+	packagesPage, //by wws 3.7.25
 
 	// miscellaneous
 	announcement,

@@ -1,10 +1,13 @@
+'use client'
+import { Menu, X } from 'lucide-react'
+
 export default function Toggle() {
 	return (
-		<label className="[grid-area:toggle] md:hidden">
+		<label className="cursor-pointer [grid-area:toggle] md:hidden">
 			<input id="header-toggle" type="checkbox" hidden />
 
-			<span className="header-open:hidden">Open</span>
-			<span className="header-closed:hidden">Close</span>
+			<Menu className="header-open:hidden text-ink h-6 w-6" />
+			<X className="header-closed:hidden text-ink h-6 w-6" />
 		</label>
 	)
 }

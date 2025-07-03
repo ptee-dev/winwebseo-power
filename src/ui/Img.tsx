@@ -94,12 +94,12 @@ function generateSrc(
 ) {
 	const { width: w_orig, height: h_orig } = getImageDimensions(image)
 
-	const w_calc = !!w // if width is provided
+	const w_calc = w // if width is provided
 		? Number(w)
 		: // if height is provided, calculate width
 			!!h && Math.floor((Number(h) * w_orig) / h_orig)
 
-	const h_calc = !!h // if height is provided
+	const h_calc = h // if height is provided
 		? Number(h)
 		: // if width is provided, calculate height
 			!!w && Math.floor((Number(w) * h_orig) / w_orig)
@@ -107,8 +107,8 @@ function generateSrc(
 	return {
 		src: urlFor(image)
 			.withOptions({
-				width: !!w ? Number(w) : undefined,
-				height: !!h ? Number(h) : undefined,
+				width: w ? Number(w) : undefined,
+				height: h ? Number(h) : undefined,
 				auto: 'format',
 			})
 			.url(),

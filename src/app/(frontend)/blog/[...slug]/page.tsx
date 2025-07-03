@@ -13,14 +13,18 @@ import {
 import { languages, type Lang } from '@/lib/i18n'
 import errors from '@/lib/errors'
 
+// ✅ Page รับ params แบบ Promise แล้ว resolve ก่อนใช้งาน
 export default async function Page({ params }: Props) {
-	const post = await getPost(await params)
+	const resolvedParams = await params
+	const post = await getPost(resolvedParams)
 	if (!post) notFound()
 	return <Modules modules={post.modules} post={post} />
 }
 
+// ✅ generateMetadata ก็ต้อง await params เช่นกัน
 export async function generateMetadata({ params }: Props) {
-	const post = await getPost(await params)
+	const resolvedParams = await params
+	const post = await getPost(resolvedParams)
 	if (!post) notFound()
 	return processMetadata(post)
 }
@@ -33,7 +37,7 @@ export async function generateStaticParams() {
 	return slugs.map((slug) => ({ slug: slug.split('/') }))
 }
 
-async function getPost(params: Params) {
+async function getPost(params: ResolvedParams) {
 	const blogTemplateExists = await fetchSanityLive<boolean>({
 		query: groq`count(*[_type == 'global-module' && path == '${BLOG_DIR}/']) > 0`,
 	})
@@ -68,13 +72,9 @@ async function getPost(params: Params) {
 				'ogimage': image.asset->url + '?w=1200'
 			},
 			'modules': (
-				// global modules (before)
 				*[_type == 'global-module' && path == '*'].before[]{ ${MODULES_QUERY} }
-				// path modules (before)
 				+ *[_type == 'global-module' && path == '${BLOG_DIR}/'].before[]{ ${MODULES_QUERY} }
-				// path modules (after)
 				+ *[_type == 'global-module' && path == '${BLOG_DIR}/'].after[]{ ${MODULES_QUERY} }
-				// global modules (after)
 				+ *[_type == 'global-module' && path == '*'].after[]{ ${MODULES_QUERY} }
 			),
 			${TRANSLATIONS_QUERY},
@@ -83,13 +83,14 @@ async function getPost(params: Params) {
 	})
 }
 
-type Params = { slug: string[] }
+// ✅ types ที่ถูกต้อง
+type ResolvedParams = { slug: string[] }
 
 type Props = {
-	params: Promise<Params>
+	params: Promise<ResolvedParams>
 }
 
-function processSlug(params: Params) {
+function processSlug(params: ResolvedParams) {
 	const lang = languages.includes(params.slug[0] as Lang)
 		? params.slug[0]
 		: undefined
